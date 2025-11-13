@@ -3,15 +3,16 @@ from stats import count_words, count_characters, get_book_text, sort_dict
 
 def main():
 
-    if len(sys.argv) != 2:
-        print("Usage: python3 main.py <path_to_book>")
-        sys.exit(1)
+    book_name = input("Which book do you want to analyze? ")
+    book_path = f"books/{book_name}.txt"
     
-    
-    book = get_book_text(sys.argv[1])
+    try:        
+        book = get_book_text(book_path)
+    except FileNotFoundError:
+        print(f"Error: no book found at {book_path}")
+        return
 
     character_count = sort_dict(count_characters(book))
-
     allowed_characters = set("abcdefghijklmnopqrstuvwxyzæâêëô")
 
 
